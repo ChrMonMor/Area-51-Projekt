@@ -24,7 +24,7 @@ namespace Area51ProjektConsoleApp
         public FloorPanel FloorPanel { get; set; }
         public static void AddToTravelList()
         {
-            Program.Elevator.TravelList.Enqueue()
+            Program.Elevator.TravelList.Enqueue(Scanner.ScanningStaff.AtFloor);
 
 
         }
