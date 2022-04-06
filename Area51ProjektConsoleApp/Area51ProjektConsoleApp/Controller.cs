@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace Area51ProjektConsoleApp
 {
-    internal class Controller
+    public class Controller
     {
+        private static int securityInformation { get; set; }
+        public static int SecurityInformation
+        {
+            get { return securityInformation; }
+            set { securityInformation = value; }
+        }
+
+        public static void ElevatorRequestProcess(Floor floorTarget)
+        {
+            securityInformation = Scanner.ScanStaffMember();
+            if (FloorPanel.AccessVerification(floorTarget))
+            {
+                Elevator.AddToTravelList();
+            }
+        }
     }
 }
