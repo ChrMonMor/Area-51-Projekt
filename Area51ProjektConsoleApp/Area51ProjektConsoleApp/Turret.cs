@@ -8,26 +8,21 @@ namespace Area51ProjektConsoleApp
 {
     public class Turret
     {
-        public static void Kill(Staff staff, Floor floor)
+        private static Floor CeilingTurret;
+
+        public Turret(Floor ceilingTurret)
         {
-            DelayKill();
-            if(staff.AtFloor == floor)
+            CeilingTurret = ceilingTurret;
+        }
+
+        public bool Kill(Staff staff)
+        {
+            Delaying.DelayTime(1000,1000000);
+            if(staff.AtFloor.CeilingTurret.Equals(CeilingTurret))
             {
                 staff.Living = false;
-                KillConfirm(staff);
             }
-        }
-        private static void DelayKill()
-        {
-            Task.Delay(RNG.RandomNumberGenerator(1000, 1000000));
-        }
-        public static bool KillConfirm(Staff staff)
-        {
-            if(staff.Living == false)
-            {
-                return true;
-            }
-            return false;
+            return !staff.Living;
         }
     }
 }

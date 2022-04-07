@@ -8,19 +8,27 @@ namespace Area51ProjektConsoleApp
 {
     public class Controller
     {
-        private static int securityInformation { get; set; }
+        private static int securityInformation;
         public static int SecurityInformation
         {
             get { return securityInformation; }
             set { securityInformation = value; }
         }
-
-        public static void ElevatorRequestProcess(Floor floorTarget)
+        public static void SetSecurityInformation(Staff staff, Floor floor)
         {
-            securityInformation = Scanner.ScanStaffMember();
-            if (FloorPanel.AccessVerification(floorTarget))
+            securityInformation = floor.Scanner.StaffMember(staff);
+        }
+
+        public static bool ElevatorRequestProcess()
+        {
+            return true;
+        }
+
+        private void TurretOrder(Staff staff, Floor floor)
+        {
+            if (floor.CeilingTurret.Kill(staff))
             {
-                Elevator.AddToTravelList();
+                //Show Message
             }
         }
     }

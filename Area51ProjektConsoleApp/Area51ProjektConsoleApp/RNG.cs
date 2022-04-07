@@ -10,9 +10,9 @@ namespace Area51ProjektConsoleApp
     {
         private static readonly Random RandomNumber = new Random();
 
-        public static int RandomNumberGenerator(int min, int Max)
+        public static int RandomNumberGenerator(int min, int max)
         {
-            return RandomNumber.Next(min, Max+1);
+            return RandomNumber.Next(min, max);
         }
     }
 }

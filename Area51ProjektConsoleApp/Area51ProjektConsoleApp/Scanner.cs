@@ -8,21 +8,16 @@ namespace Area51ProjektConsoleApp
 {
     public class Scanner
     {
-        private static Staff scanningStaff;
+        private readonly Floor floor;
 
-        public static Staff ScanningStaff
+        public Scanner(Floor floor)
         {
-            get { return scanningStaff; }
-            set { scanningStaff = value; }
+            this.floor = floor;
         }
 
-        public static int ScanStaffMember()
+        public int StaffMember(Staff staff)
         {
-            return ScanningStaff.SecurityClearance;
-        }
-        public static void StaffMember(Staff staff)
-        {
-            scanningStaff = staff;
+            return staff.SecurityClearance;
         }
     }
 }

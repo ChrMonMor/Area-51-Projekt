@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Delaying.cs" />
     <Compile Include="Elevator.cs" />
     <Compile Include="Floor.cs" />
     <Compile Include="FloorPanel.cs" />

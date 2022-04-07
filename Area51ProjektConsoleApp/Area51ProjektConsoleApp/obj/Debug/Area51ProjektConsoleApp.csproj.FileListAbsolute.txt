@@ -1,0 +1,8 @@
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\bin\Debug\Area51ProjektConsoleApp.exe.config
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\bin\Debug\Area51ProjektConsoleApp.exe
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\bin\Debug\Area51ProjektConsoleApp.pdb
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\obj\Debug\Area51ProjektConsoleApp.csproj.AssemblyReference.cache
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\obj\Debug\Area51ProjektConsoleApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\obj\Debug\Area51ProjektConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\obj\Debug\Area51ProjektConsoleApp.exe
+C:\Users\chri615w\source\repos\Area-51-Projekt\Area51ProjektConsoleApp\Area51ProjektConsoleApp\obj\Debug\Area51ProjektConsoleApp.pdb

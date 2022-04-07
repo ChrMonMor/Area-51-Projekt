@@ -25,13 +25,13 @@ namespace Area51ProjektConsoleApp
         public Floor TargetFloor { get; set; }
         public bool Living { get; set; }
         
-        public static void StaffBehavior(Staff staff)
+        public void StaffBehavior(Base @base)
         {
-            if (staff.Living == true)
+            if (this.Living == true)
             {
-                if (staff.TargetFloor != staff.AtFloor)
+                if (this.TargetFloor != this.AtFloor)
                 {
-                    Panel.RequestElevator(staff);
+                    Panel.RequestElevator(@base.Elevator);
                 }
             }
         }

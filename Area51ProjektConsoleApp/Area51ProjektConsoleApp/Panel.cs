@@ -8,10 +8,16 @@ namespace Area51ProjektConsoleApp
 {
     public class Panel
     {
-        static public void RequestElevator(Staff staff)
+        private static Floor panel;
+
+        public Panel(Floor floor)
         {
-            Scanner.StaffMember(staff);
-            Controller.ElevatorRequestProcess(staff.TargetFloor);
+            panel = floor;
+        }
+
+        static public void RequestElevator(Elevator elevator)
+        {
+            elevator.SendElevatorToRequestedFloor(panel);
         }
     }
 }

@@ -8,13 +8,27 @@ namespace Area51ProjektConsoleApp
 {
     public class FloorPanel
     {
-        public static bool AccessVerification(Floor floorTarget)
+        public FloorPanel(Elevator elevator)
         {
-            if  (Controller.SecurityInformation == floorTarget.SecurityClearance)
+            Elevator = elevator;
+        }
+        private static Elevator Elevator { get; set; }
+        public static bool AccessVerification()
+        {
+            Controller.SetSecurityInformation(Elevator.Rider, Elevator.AtFloor);
+            if  (Controller.SecurityInformation >= Elevator.TargetFloor.SecurityClearance)
             {
                 return true;
             }
             return false;
         }
+        public static void SendElevatorToFloor(Floor floor)
+        {
+            if (AccessVerification())
+            {
+                Elevator.SendElevatorToRequestedFloor(floor);
+            }
+        }
+
     }
 }
