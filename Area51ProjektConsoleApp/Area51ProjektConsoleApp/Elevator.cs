@@ -13,43 +13,42 @@ namespace Area51ProjektConsoleApp
             AtFloor = floors[0];
             TargetFloor = null;
             Rider = null;
-            TravelList = new Queue<Floor>();
+            TravelQueue = new Queue<Floor>();
             FloorPanel = new FloorPanel(this);
         }
 
         public  Floor AtFloor { get; set; }
         public  Floor TargetFloor { get; set; }
         public  Staff Rider { get; set; }
-        public  Queue<Floor> TravelList { get; set; }
+        public  Queue<Floor> TravelQueue { get; set; }
         public  FloorPanel FloorPanel { get; set; }
-        public void AddToTravelList()
+        public void GotoFloor()
         {
-            if (Controller.ElevatorRequestProcess())
-            {
-
-            }
+            Delaying.DelayTime(1000);
+            this.AtFloor = this.TravelQueue.Peek();
+            this.TravelQueue.Dequeue();
         }
-        // sends the elevator to target floor. Fire only if they are allow 
-        private void GotoFloor()
+        public void AddTooTravelQueue(Floor floor)
+        {
+            this.TravelQueue.Enqueue(floor);
+        }
+        public void SendElevatorToRequestedFloor()
         {
             Delaying.DelayTime(1000);
             this.AtFloor = this.TargetFloor;
-        }
-        public void SendElevatorToRequestedFloor(Floor floor)
-        {
-            Delaying.DelayTime(1000);
-            this.AtFloor = floor;
         }
         public void RequstElevatorToGoToo(Floor floor)
         {
             this.TargetFloor = floor;
         }
-        public void StaffEntersElevator(Staff staff)
+        public bool StaffEntersElevator(Staff staff)
         {
-            if(this.Rider == null && staff != this.Rider)
+            if(this.Rider == null)
             {
                 this.Rider = staff;
+                return true;
             }
+            return false;
         }
         public void StaffExitsElevator(Staff staff)
         {

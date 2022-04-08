@@ -8,9 +8,13 @@ namespace Area51ProjektConsoleApp
 {
     public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Base @base = new Base();
+            while (!true)
+            {
+
+            }
         }
     }
 }

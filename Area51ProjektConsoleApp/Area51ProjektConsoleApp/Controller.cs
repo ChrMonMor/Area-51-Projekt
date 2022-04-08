@@ -19,12 +19,20 @@ namespace Area51ProjektConsoleApp
             securityInformation = floor.Scanner.StaffMember(staff);
         }
 
-        public static bool ElevatorRequestProcess()
+        public static void ElevatorRequestProcess(Staff staff, Floor floor, Elevator elevator)
         {
-            return true;
+            SetSecurityInformation(staff, floor);
+            if (securityInformation >= staff.AtFloor.SecurityClearance)
+            {
+                elevator.AddTooTravelQueue(floor);
+            }
+            else
+            {
+                TurretOrder(staff, floor);
+            }
         }
 
-        private void TurretOrder(Staff staff, Floor floor)
+        private static void TurretOrder(Staff staff, Floor floor)
         {
             if (floor.CeilingTurret.Kill(staff))
             {

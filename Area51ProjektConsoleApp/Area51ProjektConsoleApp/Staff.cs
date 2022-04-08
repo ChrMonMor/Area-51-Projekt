@@ -25,13 +25,27 @@ namespace Area51ProjektConsoleApp
         public Floor TargetFloor { get; set; }
         public bool Living { get; set; }
         
-        public void StaffBehavior(Base @base)
+        public void StaffBehavior(Base homeBase)
         {
+            // can only do things if they are alive
             if (this.Living == true)
             {
+                //checks if any elevator is on this floor and if there are anyone inside it. Then tries too use it and go to their wanted floor
+                foreach (Elevator elevator in homeBase.Elevator)
+                {
+                    if(elevator.AtFloor == this.AtFloor)
+                    {
+                        if (elevator.StaffEntersElevator(this))
+                        {
+                            elevator.FloorPanel.SendElevatorToFloor();
+                            break;
+                        }
+                    }
+                }
+                // staff makes a request for an elevator to get too their current floor
                 if (this.TargetFloor != this.AtFloor)
                 {
-                    Panel.RequestElevator(@base.Elevator);
+                    homeBase.Floors.Find(x => x == this.AtFloor).Panel.RequestElevator(this,homeBase.Elevator[RNG.RandomNumberGenerator(0, homeBase.Elevator.Count())]);
                 }
             }
         }

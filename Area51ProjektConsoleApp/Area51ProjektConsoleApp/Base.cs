@@ -38,5 +38,16 @@ namespace Area51ProjektConsoleApp
         public  Elevator[] Elevator { get; set; }
         public  List<Floor> Floors { get; set; }
         public  Staff[] Staffs { get; set; }
+        public void TurnStaff(Staff staff)
+        {
+            staff.StaffBehavior(this);
+        }
+        public void TurnElevator(Elevator elevator)
+        {
+            if (elevator.Rider == null && elevator.TravelQueue.Any())
+            {
+                elevator.GotoFloor();
+            }
+        }
     }
 }

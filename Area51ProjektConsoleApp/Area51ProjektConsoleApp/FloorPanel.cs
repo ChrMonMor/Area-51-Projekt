@@ -13,8 +13,9 @@ namespace Area51ProjektConsoleApp
             Elevator = elevator;
         }
         private static Elevator Elevator { get; set; }
-        public static bool AccessVerification()
+        public bool AccessVerification()
         {
+            Elevator.RequstElevatorToGoToo(Elevator.Rider.TargetFloor);
             Controller.SetSecurityInformation(Elevator.Rider, Elevator.AtFloor);
             if  (Controller.SecurityInformation >= Elevator.TargetFloor.SecurityClearance)
             {
@@ -22,13 +23,16 @@ namespace Area51ProjektConsoleApp
             }
             return false;
         }
-        public static void SendElevatorToFloor(Floor floor)
+        public void SendElevatorToFloor()
         {
             if (AccessVerification())
             {
-                Elevator.SendElevatorToRequestedFloor(floor);
+                Elevator.SendElevatorToRequestedFloor();
+            }
+            else
+            {
+                Elevator.StaffExitsElevator(Elevator.Rider);
             }
         }
-
     }
 }

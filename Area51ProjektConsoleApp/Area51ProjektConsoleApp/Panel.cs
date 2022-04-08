@@ -15,9 +15,9 @@ namespace Area51ProjektConsoleApp
             panel = floor;
         }
 
-        static public void RequestElevator(Elevator elevator)
+        public void RequestElevator(Staff staff, Elevator elevator)
         {
-            elevator.SendElevatorToRequestedFloor(panel);
+            Controller.ElevatorRequestProcess(staff, panel, elevator);
         }
     }
 }
