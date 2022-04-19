@@ -10,12 +10,13 @@ namespace Area51ProjektConsoleApp
     {
         public Floor(int securityClearance)
         {
+            FloorNumber = securityClearance;
             Scanner = new Scanner(this);
             SecurityClearance = securityClearance;
             Panel = new Panel(this);
             CeilingTurret = new Turret(this);
         }
-
+        public int FloorNumber { get; set; }
         public Scanner Scanner { get; set; }
         public int SecurityClearance { get; set; }
         public Panel Panel { get; set; }

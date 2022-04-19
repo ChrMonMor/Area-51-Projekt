@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,15 @@ namespace Area51ProjektConsoleApp
                 TargetFloor = floors[RNG.RandomNumberGenerator(1, floors.Count)];
             }
             Living = true;
+            Name = textFile[RNG.RandomNumberGenerator(1, textFile.Length)];
         }
         public int SecurityClearance { get; set; }
         public Floor AtFloor { get; set; }
         public Floor TargetFloor { get; set; }
         public bool Living { get; set; }
-        
+        public string Name { get; set; }
+        static readonly string[] textFile = File.ReadAllLines(@"C:\Users\chri615w\source\repos\Area-51-Projekt\names.txt");
+
         public void StaffBehavior(Base homeBase)
         {
             // can only do things if they are alive

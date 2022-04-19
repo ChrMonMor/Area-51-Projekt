@@ -14,7 +14,9 @@ namespace Area51ProjektConsoleApp
             Elevator = Elevators();
             Floors = FloorList();
             Staffs = StaffArray();
+            AllStaffIsHappy = false;
         }
+
         private Elevator[] Elevators()
         {
             Elevator[] elevators = new Elevator[] { new Elevator(FloorList()) };
@@ -38,6 +40,8 @@ namespace Area51ProjektConsoleApp
         public  Elevator[] Elevator { get; set; }
         public  List<Floor> Floors { get; set; }
         public  Staff[] Staffs { get; set; }
+        public bool AllStaffIsHappy { get; set; }
+
         public void TurnStaff(Staff staff)
         {
             staff.StaffBehavior(this);
@@ -49,5 +53,36 @@ namespace Area51ProjektConsoleApp
                 elevator.GotoFloor();
             }
         }
+        public void IsAllStaffHappy()
+        {
+            foreach(Staff staff in this.Staffs)
+            {
+                if (staff.Living)
+                {
+                    if (staff.AtFloor != staff.TargetFloor)
+                    {
+                        this.AllStaffIsHappy = false;
+                        break;
+                    }
+                }
+                this.AllStaffIsHappy = true;
+            }
+        }
+        public void AllStaffsNames()
+        {
+            foreach(Staff staff in this.Staffs)
+            {
+                Console.Write(staff.Name);
+                if (staff.AtFloor == staff.TargetFloor)
+                {
+                    Console.Write(" true ");
+                }
+                else Console.Write(" false ");
+                Console.Write(staff.AtFloor.FloorNumber);
+                Console.Write(" "+staff.SecurityClearance);
+                Console.WriteLine(" " + staff.Living);
+            }
+        }
+
     }
 }

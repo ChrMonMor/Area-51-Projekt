@@ -37,6 +37,7 @@ namespace Area51ProjektConsoleApp
             if (floor.CeilingTurret.Kill(staff))
             {
                 //Show Message
+                Console.WriteLine("KIA {0}", staff.Name);
             }
         }
     }

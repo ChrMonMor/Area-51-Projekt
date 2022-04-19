@@ -11,10 +11,12 @@ namespace Area51ProjektConsoleApp
         static void Main()
         {
             Base @base = new Base();
-            while (!true)
+            do
             {
-
-            }
+                @base.AllStaffsNames();
+                @base.IsAllStaffHappy();
+                Console.WriteLine("______________________________");
+            } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }
 }
