@@ -13,10 +13,18 @@ namespace Area51ProjektConsoleApp
             Base @base = new Base();
             do
             {
+                Console.Clear();
                 @base.AllStaffsNames();
                 @base.IsAllStaffHappy();
+                @base.BuildingBase();
                 Console.WriteLine("______________________________");
-            } while (Console.ReadKey().Key != ConsoleKey.Escape);
+                Console.WriteLine("Press Esc to end Program. Any other key to Continue");
+                @base.BaseBehavior();
+                Console.WriteLine(@base.Elevators[0].TravelQueue.Count());
+                Task.Delay(1000).Wait();
+            } while (@base.Elevators[0].TravelQueue.Count()>0);
+            Console.ReadLine();
         }
+        //Console.ReadKey().Key != ConsoleKey.Escape
     }
 }

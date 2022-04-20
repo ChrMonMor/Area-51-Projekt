@@ -11,13 +11,13 @@ namespace Area51ProjektConsoleApp
     {
         public Staff(List<Floor> floors)
         {
-            SecurityClearance = RNG.RandomNumberGenerator(0,5);
-            AtFloor = floors[RNG.RandomNumberGenerator(1,floors.Count)];
-            TargetFloor = floors[RNG.RandomNumberGenerator(1, floors.Count)];
+            SecurityClearance = RNG.RandomNumberGenerator(floors.First().SecurityClearance, floors.Last().SecurityClearance+1);
+            AtFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
+            TargetFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
             //will make the staffmember needing to move
             while(AtFloor == TargetFloor)
             {
-                TargetFloor = floors[RNG.RandomNumberGenerator(1, floors.Count)];
+                TargetFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
             }
             Living = true;
             Name = textFile[RNG.RandomNumberGenerator(1, textFile.Length)];
@@ -32,24 +32,26 @@ namespace Area51ProjektConsoleApp
         public void StaffBehavior(Base homeBase)
         {
             // can only do things if they are alive
-            if (this.Living == true)
+            if (Living == true)
             {
-                //checks if any elevator is on this floor and if there are anyone inside it. Then tries too use it and go to their wanted floor
-                foreach (Elevator elevator in homeBase.Elevator)
+                if (AtFloor.FloorNumber != TargetFloor.FloorNumber)
                 {
-                    if(elevator.AtFloor == this.AtFloor)
+                    //checks if any elevator is on this floor and if there are anyone inside it. Then tries too use it and go to their wanted floor
+                    for (int i = 0; i < homeBase.Elevators.Count(); i++)
                     {
-                        if (elevator.StaffEntersElevator(this))
+                        if (homeBase.Elevators[i].AtFloor.FloorNumber == AtFloor.FloorNumber)
                         {
-                            elevator.FloorPanel.SendElevatorToFloor();
-                            break;
+                            if (homeBase.Elevators[i].StaffEntersElevator(this))
+                            {
+                                homeBase.Elevators[i].FloorPanel.SendElevatorToFloor();
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            homeBase.Floors[AtFloor.FloorNumber].Panel.RequestElevator(this, homeBase.Elevators[i]);
                         }
                     }
-                }
-                // staff makes a request for an elevator to get too their current floor
-                if (this.TargetFloor != this.AtFloor)
-                {
-                    homeBase.Floors.Find(x => x == this.AtFloor).Panel.RequestElevator(this,homeBase.Elevator[RNG.RandomNumberGenerator(0, homeBase.Elevator.Count())]);
                 }
             }
         }

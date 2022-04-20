@@ -15,45 +15,71 @@ namespace Area51ProjektConsoleApp
             Rider = null;
             TravelQueue = new Queue<Floor>();
             FloorPanel = new FloorPanel(this);
+            DelayingElevator = false;
         }
 
-        public  Floor AtFloor { get; set; }
-        public  Floor TargetFloor { get; set; }
-        public  Staff Rider { get; set; }
-        public  Queue<Floor> TravelQueue { get; set; }
-        public  FloorPanel FloorPanel { get; set; }
+        public Floor AtFloor { get; set; }
+        public Floor TargetFloor { get; set; }
+        public Staff Rider { get; set; }
+        public Queue<Floor> TravelQueue { get; set; }
+        public FloorPanel FloorPanel { get; set; }
+        private bool DelayingElevator { get; set; }
         public void GotoFloor()
         {
-            Delaying.DelayTime(1000);
-            this.AtFloor = this.TravelQueue.Peek();
-            this.TravelQueue.Dequeue();
+            if (TravelQueue.Any())
+            {
+                if (!DelayingElevator)
+                {
+                    if(AtFloor == TravelQueue.Peek())
+                    {
+                        TravelQueue.Dequeue();
+                    }
+                    else
+                    {
+                        AtFloor = TravelQueue.Peek();
+                        TravelQueue.Dequeue();
+                        DelayingElevator = true;
+                    }
+                }
+            }
         }
         public void AddTooTravelQueue(Floor floor)
         {
-            this.TravelQueue.Enqueue(floor);
+            if (!TravelQueue.Contains(floor))
+            {
+                TravelQueue.Enqueue(floor);
+            }
         }
         public void SendElevatorToRequestedFloor()
         {
-            Delaying.DelayTime(1000);
-            this.AtFloor = this.TargetFloor;
+            if (!DelayingElevator)
+            {
+                AtFloor = TargetFloor;
+                StaffExitsElevator(Rider);
+                DelayingElevator = true;
+            }
         }
         public void RequstElevatorToGoToo(Floor floor)
         {
-            this.TargetFloor = floor;
+            TargetFloor = floor;
         }
         public bool StaffEntersElevator(Staff staff)
         {
-            if(this.Rider == null)
+            if(Rider == null || Rider == staff)
             {
-                this.Rider = staff;
+                Rider = staff;
                 return true;
             }
             return false;
         }
         public void StaffExitsElevator(Staff staff)
         {
-            staff.AtFloor = this.AtFloor;
-            this.Rider = null;
+            staff.AtFloor = AtFloor;
+            Rider = null;
+        }
+        public void SetDelayingElevator()
+        {
+            DelayingElevator = false;
         }
     }
 }

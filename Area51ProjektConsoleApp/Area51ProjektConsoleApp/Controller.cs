@@ -22,11 +22,11 @@ namespace Area51ProjektConsoleApp
         public static void ElevatorRequestProcess(Staff staff, Floor floor, Elevator elevator)
         {
             SetSecurityInformation(staff, floor);
-            if (securityInformation >= staff.AtFloor.SecurityClearance)
+            if (securityInformation >= staff.TargetFloor.SecurityClearance)
             {
                 elevator.AddTooTravelQueue(floor);
             }
-            else
+            if (securityInformation < floor.SecurityClearance)
             {
                 TurretOrder(staff, floor);
             }
