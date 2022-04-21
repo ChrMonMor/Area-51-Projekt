@@ -17,9 +17,25 @@ namespace Area51ProjektConsoleApp
             CeilingTurret = new Turret(this);
         }
         public int FloorNumber { get; set; }
-        public Scanner Scanner { get; set; }
-        public int SecurityClearance { get; set; }
-        public Panel Panel { get; set; }
-        public Turret CeilingTurret { get; set; }
+        private Scanner Scanner { get; set; }
+        private int SecurityClearance { get; set; }
+        private Panel Panel { get; set; }
+        private Turret CeilingTurret { get; set; }
+        public Scanner GetScanner()
+        {
+            return Scanner;
+        }
+        public int GetSecurityClearance()
+        {
+            return SecurityClearance;
+        }
+        public Panel GetPanel()
+        {
+            return Panel;
+        }
+        public Turret GetCeilingTurret()
+        {
+            return CeilingTurret;
+        }
     }
 }

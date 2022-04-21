@@ -11,7 +11,7 @@ namespace Area51ProjektConsoleApp
     {
         public Staff(List<Floor> floors)
         {
-            SecurityClearance = RNG.RandomNumberGenerator(floors.First().SecurityClearance, floors.Last().SecurityClearance+1);
+            SecurityClearance = RNG.RandomNumberGenerator(floors.First().GetSecurityClearance(), floors.Last().GetSecurityClearance()+1);
             AtFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
             TargetFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
             //will make the staffmember needing to move
@@ -22,9 +22,9 @@ namespace Area51ProjektConsoleApp
             Living = true;
             Name = textFile[RNG.RandomNumberGenerator(1, textFile.Length)];
         }
-        public int SecurityClearance { get; set; }
+        private int SecurityClearance { get; set; }
         public Floor AtFloor { get; set; }
-        public Floor TargetFloor { get; set; }
+        private Floor TargetFloor { get; set; }
         public bool Living { get; set; }
         public string Name { get; set; }
         static readonly string[] textFile = File.ReadAllLines(@"C:\Users\chri615w\source\repos\Area-51-Projekt\names.txt");
@@ -43,17 +43,25 @@ namespace Area51ProjektConsoleApp
                         {
                             if (homeBase.Elevators[i].StaffEntersElevator(this))
                             {
-                                homeBase.Elevators[i].FloorPanel.SendElevatorToFloor();
+                                homeBase.Elevators[i].GetFloorPanel().SendElevatorToFloor();
                                 break;
                             }
                         }
                         else
                         {
-                            homeBase.Floors[AtFloor.FloorNumber].Panel.RequestElevator(this, homeBase.Elevators[i]);
+                            homeBase.Floors[AtFloor.FloorNumber].GetPanel().RequestElevator(this, homeBase.Elevators[i]);
                         }
                     }
                 }
             }
+        }
+        public int GetSecurityClearance()
+        {
+            return SecurityClearance;
+        }
+        public Floor GetTargetFloor()
+        {
+            return TargetFloor;
         }
     }
 }

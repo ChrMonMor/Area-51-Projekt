@@ -16,17 +16,17 @@ namespace Area51ProjektConsoleApp
         }
         public static void SetSecurityInformation(Staff staff, Floor floor)
         {
-            securityInformation = floor.Scanner.StaffMember(staff);
+            securityInformation = floor.GetScanner().StaffMemberScan(staff);
         }
 
         public static void ElevatorRequestProcess(Staff staff, Floor floor, Elevator elevator)
         {
             SetSecurityInformation(staff, floor);
-            if (securityInformation >= staff.TargetFloor.SecurityClearance)
+            if (securityInformation >= staff.GetTargetFloor().GetSecurityClearance())
             {
                 elevator.AddTooTravelQueue(floor);
             }
-            if (securityInformation < floor.SecurityClearance)
+            if (securityInformation < floor.GetSecurityClearance())
             {
                 TurretOrder(staff, floor);
             }
@@ -34,7 +34,7 @@ namespace Area51ProjektConsoleApp
 
         private static void TurretOrder(Staff staff, Floor floor)
         {
-            if (floor.CeilingTurret.Kill(staff))
+            if (floor.GetCeilingTurret().Kill(staff))
             {
                 //Show Message
                 Console.WriteLine("KIA {0}", staff.Name);

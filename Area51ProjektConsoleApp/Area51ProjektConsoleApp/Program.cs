@@ -20,9 +20,8 @@ namespace Area51ProjektConsoleApp
                 Console.WriteLine("______________________________");
                 Console.WriteLine("Press Esc to end Program. Any other key to Continue");
                 @base.BaseBehavior();
-                Console.WriteLine(@base.Elevators[0].TravelQueue.Count());
                 Task.Delay(1000).Wait();
-            } while (@base.Elevators[0].TravelQueue.Count()>0);
+            } while (@base.AllStaffIsNotHappy);
             Console.ReadLine();
         }
         //Console.ReadKey().Key != ConsoleKey.Escape

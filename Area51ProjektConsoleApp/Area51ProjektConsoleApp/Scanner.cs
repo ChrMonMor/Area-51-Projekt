@@ -14,11 +14,11 @@ namespace Area51ProjektConsoleApp
             this.StaffScanner = floor;
         }
 
-        public int StaffMember(Staff staff)
+        public int StaffMemberScan(Staff staff)
         {
             // incase that the staff can't be found, this might kill them (but that is fine) 
             if (staff.AtFloor.FloorNumber != StaffScanner.FloorNumber) { return 0; }
-            return staff.SecurityClearance;
+            return staff.GetSecurityClearance();
         }
     }
 }

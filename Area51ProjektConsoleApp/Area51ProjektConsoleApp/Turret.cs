@@ -10,24 +10,25 @@ namespace Area51ProjektConsoleApp
     {
         private  Floor CeilingTurret { get; set; }
         private List<Staff> KillList { get; set; }
-        private bool Loaded { get; set; }
+        private int Loaded { get; set; }
+        private readonly int MagazineSize = 1;
 
         public Turret(Floor ceilingTurret)
         {
             CeilingTurret = ceilingTurret;
             KillList = new List<Staff>();
-            Loaded = true;
+            Loaded = MagazineSize;
         }
 
         public bool Kill(Staff staff)
         {
             if (KillList.Contains(staff))
             {
-                if (staff.AtFloor.FloorNumber.Equals(CeilingTurret.FloorNumber) && Loaded)
+                if (staff.AtFloor.FloorNumber.Equals(CeilingTurret.FloorNumber) && Loaded > 0)
                 {
                     staff.Living = false;
                     KillList.Remove(staff);
-                    Loaded = false;
+                    Loaded -= 1;
                 }
                 else
                 {
@@ -42,7 +43,8 @@ namespace Area51ProjektConsoleApp
         }
         public void ReloadingTurret()
         {
-            Loaded = true;
+            if(Loaded==0)
+            Loaded = MagazineSize;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Area51ProjektConsoleApp
             Elevators = ElevatorArray();
             Floors = FloorList();
             Staffs = StaffArray();
-            AllStaffIsHappy = false;
+            AllStaffIsNotHappy = true;
         }
 
         private Elevator[] ElevatorArray()
@@ -40,7 +40,7 @@ namespace Area51ProjektConsoleApp
         public  Elevator[] Elevators { get; set; }
         public  List<Floor> Floors { get; set; }
         public  Staff[] Staffs { get; set; }
-        public bool AllStaffIsHappy { get; set; }
+        public bool AllStaffIsNotHappy { get; set; }
 
         public void TurnStaff(Staff staff)
         {
@@ -48,17 +48,13 @@ namespace Area51ProjektConsoleApp
         }
         public void TurnElevator(Elevator elevator)
         {
-            if (elevator.Rider == null)
-            {
-                elevator.GotoFloor();
-            }
-            elevator.SetDelayingElevator();
+            elevator.ElevatorBehavior(this);
         }
         public void ReloadTurrets()
         {
             foreach(Floor floor in Floors)
             {
-                floor.CeilingTurret.ReloadingTurret();
+                floor.GetCeilingTurret().ReloadingTurret();
             }
         }
         public void IsAllStaffHappy()
@@ -67,13 +63,13 @@ namespace Area51ProjektConsoleApp
             {
                 if (staff.Living)
                 {
-                    if (staff.AtFloor != staff.TargetFloor)
+                    if (staff.AtFloor != staff.GetTargetFloor())
                     {
-                        AllStaffIsHappy = false;
+                        AllStaffIsNotHappy = true;
                         break;
                     }
                 }
-                AllStaffIsHappy = true;
+                AllStaffIsNotHappy = false;
             }
         }
         // shows staff info to user
@@ -84,14 +80,14 @@ namespace Area51ProjektConsoleApp
             {
                 if (staff.Name.Length > 7) { Console.Write(staff.Name.Substring(0, 7) + "\t"); }
                 else { Console.Write(staff.Name + "\t"); }
-                if (staff.AtFloor == staff.TargetFloor)
+                if (staff.AtFloor == staff.GetTargetFloor())
                 {
                     Console.Write(" \ttrue");
                 }
                 else Console.Write(" \tfalse ");
                 Console.Write("\t" + staff.AtFloor.FloorNumber);
-                Console.Write("\t" + staff.SecurityClearance);
-                Console.Write("\t" + staff.TargetFloor.FloorNumber);
+                Console.Write("\t" + staff.GetSecurityClearance());
+                Console.Write("\t" + staff.GetTargetFloor().FloorNumber);
                 Console.WriteLine("\t" + staff.Living);
             }
         }
@@ -128,14 +124,14 @@ namespace Area51ProjektConsoleApp
                 {
                     if (staff.Name.Length > 7) { Console.Write(staff.Name.Substring(0, 7) + "\t"); }
                     else { Console.Write(staff.Name + "\t"); }
-                    if (staff.AtFloor == staff.TargetFloor)
+                    if (staff.AtFloor == staff.GetTargetFloor())
                     {
                         Console.Write(" \ttrue");
                     }
                     else Console.Write(" \tfalse ");
                     Console.Write("\t" + staff.AtFloor.FloorNumber);
-                    Console.Write("\t" + staff.SecurityClearance);
-                    Console.Write("\t" + staff.TargetFloor.FloorNumber);
+                    Console.Write("\t" + staff.GetSecurityClearance());
+                    Console.Write("\t" + staff.GetTargetFloor().FloorNumber);
                     Console.WriteLine("\t" + staff.Living);
                 }
             }

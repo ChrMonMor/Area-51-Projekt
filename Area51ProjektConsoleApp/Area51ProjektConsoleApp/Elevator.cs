@@ -15,20 +15,33 @@ namespace Area51ProjektConsoleApp
             Rider = null;
             TravelQueue = new Queue<Floor>();
             FloorPanel = new FloorPanel(this);
-            DelayingElevator = false;
+            DelayingElevator = Speed;
         }
 
         public Floor AtFloor { get; set; }
-        public Floor TargetFloor { get; set; }
-        public Staff Rider { get; set; }
-        public Queue<Floor> TravelQueue { get; set; }
-        public FloorPanel FloorPanel { get; set; }
-        private bool DelayingElevator { get; set; }
-        public void GotoFloor()
+        private Floor TargetFloor { get; set; }
+        private Staff Rider { get; set; }
+        private Queue<Floor> TravelQueue { get; set; }
+        private FloorPanel FloorPanel { get; set; }
+        private int DelayingElevator { get; set; }
+        private readonly int Speed = 1;
+        public Floor GetTargetFloor()
+        {
+            return TargetFloor;
+        }
+        public Staff GetRider()
+        {
+            return Rider;
+        }
+        public FloorPanel GetFloorPanel()
+        {
+            return FloorPanel;
+        }
+        private void GotoFloor()
         {
             if (TravelQueue.Any())
             {
-                if (!DelayingElevator)
+                if (DelayingElevator > 0)
                 {
                     if(AtFloor == TravelQueue.Peek())
                     {
@@ -38,7 +51,7 @@ namespace Area51ProjektConsoleApp
                     {
                         AtFloor = TravelQueue.Peek();
                         TravelQueue.Dequeue();
-                        DelayingElevator = true;
+                        DelayingElevator = -1;
                     }
                 }
             }
@@ -50,13 +63,23 @@ namespace Area51ProjektConsoleApp
                 TravelQueue.Enqueue(floor);
             }
         }
+
+        public void ElevatorBehavior(Base @base)
+        {
+            if (Rider == null)
+            {
+                GotoFloor();
+            }
+            SetDelayingElevator(); ;
+        }
+
         public void SendElevatorToRequestedFloor()
         {
-            if (!DelayingElevator)
+            if (DelayingElevator > 0)
             {
                 AtFloor = TargetFloor;
                 StaffExitsElevator(Rider);
-                DelayingElevator = true;
+                DelayingElevator = -1;
             }
         }
         public void RequstElevatorToGoToo(Floor floor)
@@ -79,7 +102,7 @@ namespace Area51ProjektConsoleApp
         }
         public void SetDelayingElevator()
         {
-            DelayingElevator = false;
+            DelayingElevator = Speed;
         }
     }
 }
