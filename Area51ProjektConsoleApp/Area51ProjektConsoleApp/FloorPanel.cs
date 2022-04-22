@@ -12,7 +12,7 @@ namespace Area51ProjektConsoleApp
         {
             Elevator = elevator;
         }
-        private static Elevator Elevator { get; set; }
+        private Elevator Elevator { get; set; }
         private bool AccessVerification()
         {
             Elevator.RequstElevatorToGoToo(Elevator.GetRider().GetTargetFloor());

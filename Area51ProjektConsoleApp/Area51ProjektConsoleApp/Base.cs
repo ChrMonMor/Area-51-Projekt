@@ -57,9 +57,13 @@ namespace Area51ProjektConsoleApp
         }
         public void BaseBehavior()
         {
-            foreach (Staff staff in Staffs)
+            for (int i = 0; i < SpawnStaff; i++)
             {
-                staff.StaffBehavior(this);
+                Staffs[i].StaffBehavior(this);
+            }
+            if (SpawnStaff < Staffs.Count())
+            {
+                SpawnStaff += 1;
             }
             foreach (Elevator elevator in Elevators)
             {
@@ -70,23 +74,24 @@ namespace Area51ProjektConsoleApp
                 floor.GetCeilingTurret().ReloadingTurret();
             }
         }
+        private static int SpawnStaff = 1; 
         // shows staff info to user
         public void AllStaffsNames()
         {
             Console.WriteLine("Name: \t\tHappy: \tAt: \tCan: \tWant: \tAlive:");
-            foreach(Staff staff in Staffs)
+            for (int i = 0; i < SpawnStaff; i++)
             {
-                if (staff.Name.Length > 7) { Console.Write(staff.Name.Substring(0, 7) + "\t"); }
-                else { Console.Write(staff.Name + "\t"); }
-                if (staff.AtFloor == staff.GetTargetFloor())
+                if (Staffs[i].Name.Length > 7) { Console.Write(Staffs[i].Name.Substring(0, 7) + "\t"); }
+                else { Console.Write(Staffs[i].Name + "\t"); }
+                if (Staffs[i].AtFloor == Staffs[i].GetTargetFloor())
                 {
                     Console.Write(" \ttrue");
                 }
                 else Console.Write(" \tfalse ");
-                Console.Write("\t" + staff.AtFloor.FloorNumber);
-                Console.Write("\t" + staff.GetSecurityClearance());
-                Console.Write("\t" + staff.GetTargetFloor().FloorNumber);
-                Console.WriteLine("\t" + staff.Living);
+                Console.Write("\t" + Staffs[i].AtFloor.FloorNumber);
+                Console.Write("\t" + Staffs[i].GetSecurityClearance());
+                Console.Write("\t" + Staffs[i].GetTargetFloor().FloorNumber);
+                Console.WriteLine("\t" + Staffs[i].Living);
             }
         }
         //|------|-|-|
@@ -116,21 +121,21 @@ namespace Area51ProjektConsoleApp
         public void AllStaffsNamesButRemovingDead()
         {
             Console.WriteLine("Name: \t\tHappy: \tAt: \tCan: \tWant: \tAlive:");
-            foreach (Staff staff in Staffs)
+            for (int i = 0; i < SpawnStaff; i++)
             {
-                if (staff.Living)
+                if (Staffs[i].Living)
                 {
-                    if (staff.Name.Length > 7) { Console.Write(staff.Name.Substring(0, 7) + "\t"); }
-                    else { Console.Write(staff.Name + "\t"); }
-                    if (staff.AtFloor == staff.GetTargetFloor())
+                    if (Staffs[i].Name.Length > 7) { Console.Write(Staffs[i].Name.Substring(0, 7) + "\t"); }
+                    else { Console.Write(Staffs[i].Name + "\t"); }
+                    if (Staffs[i].AtFloor == Staffs[i].GetTargetFloor())
                     {
                         Console.Write(" \ttrue");
                     }
                     else Console.Write(" \tfalse ");
-                    Console.Write("\t" + staff.AtFloor.FloorNumber);
-                    Console.Write("\t" + staff.GetSecurityClearance());
-                    Console.Write("\t" + staff.GetTargetFloor().FloorNumber);
-                    Console.WriteLine("\t" + staff.Living);
+                    Console.Write("\t" + Staffs[i].AtFloor.FloorNumber);
+                    Console.Write("\t" + Staffs[i].GetSecurityClearance());
+                    Console.Write("\t" + Staffs[i].GetTargetFloor().FloorNumber);
+                    Console.WriteLine("\t" + Staffs[i].Living);
                 }
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Area51ProjektConsoleApp
 {
-    public class Controller
+    public static class Controller
     {
         private static int securityInformation;
         public static int SecurityInformation

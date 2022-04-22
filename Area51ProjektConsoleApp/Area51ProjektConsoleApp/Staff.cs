@@ -12,7 +12,7 @@ namespace Area51ProjektConsoleApp
         public Staff(List<Floor> floors)
         {
             SecurityClearance = RNG.RandomNumberGenerator(floors.First().GetSecurityClearance(), floors.Last().GetSecurityClearance()+1);
-            AtFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
+            AtFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber + 1)];
             TargetFloor = floors[RNG.RandomNumberGenerator(floors.First().FloorNumber, floors.Last().FloorNumber+1)];
             //will make the staffmember needing to move
             while(AtFloor == TargetFloor)
@@ -27,7 +27,7 @@ namespace Area51ProjektConsoleApp
         private Floor TargetFloor { get; set; }
         public bool Living { get; set; }
         public string Name { get; set; }
-        static readonly string[] textFile = File.ReadAllLines(@"C:\Users\chri615w\source\repos\Area-51-Projekt\names.txt");
+        private static readonly string[] textFile = File.ReadAllLines(@"C:\Users\chri615w\source\repos\Area-51-Projekt\names.txt");
 
         public void StaffBehavior(Base homeBase)
         {
