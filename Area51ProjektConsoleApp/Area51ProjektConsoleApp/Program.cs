@@ -21,7 +21,7 @@ namespace Area51ProjektConsoleApp
                 Console.WriteLine("Press Esc to end Program. Any other key to Continue");
                 @base.BaseBehavior();
                 Task.Delay(1000).Wait();
-            } while (@base.AllStaffIsNotHappy);
+            } while (@base.IsAllStaffHappy());
             Console.ReadLine();
         }
         //Console.ReadKey().Key != ConsoleKey.Escape

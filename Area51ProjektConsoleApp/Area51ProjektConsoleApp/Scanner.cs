@@ -11,7 +11,7 @@ namespace Area51ProjektConsoleApp
         private  Floor StaffScanner { get; set; }
         public Scanner(Floor floor)
         {
-            this.StaffScanner = floor;
+            StaffScanner = floor;
         }
 
         public int StaffMemberScan(Staff staff)

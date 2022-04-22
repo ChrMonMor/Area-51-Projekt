@@ -10,7 +10,6 @@ namespace Area51ProjektConsoleApp
     {
         public Base()
         {
-            Controller = new Controller();
             Elevators = ElevatorArray();
             Floors = FloorList();
             Staffs = StaffArray();
@@ -36,28 +35,11 @@ namespace Area51ProjektConsoleApp
             }
             return staffs;
         }
-        public  Controller @Controller { get; set; }
         public  Elevator[] Elevators { get; set; }
         public  List<Floor> Floors { get; set; }
-        public  Staff[] Staffs { get; set; }
-        public bool AllStaffIsNotHappy { get; set; }
-
-        public void TurnStaff(Staff staff)
-        {
-            staff.StaffBehavior(this);
-        }
-        public void TurnElevator(Elevator elevator)
-        {
-            elevator.ElevatorBehavior(this);
-        }
-        public void ReloadTurrets()
-        {
-            foreach(Floor floor in Floors)
-            {
-                floor.GetCeilingTurret().ReloadingTurret();
-            }
-        }
-        public void IsAllStaffHappy()
+        private  Staff[] Staffs { get; set; }
+        private bool AllStaffIsNotHappy { get; set; }
+        public bool IsAllStaffHappy()
         {
             foreach(Staff staff in Staffs)
             {
@@ -70,6 +52,22 @@ namespace Area51ProjektConsoleApp
                     }
                 }
                 AllStaffIsNotHappy = false;
+            }
+            return AllStaffIsNotHappy;
+        }
+        public void BaseBehavior()
+        {
+            foreach (Staff staff in Staffs)
+            {
+                staff.StaffBehavior(this);
+            }
+            foreach (Elevator elevator in Elevators)
+            {
+                elevator.ElevatorBehavior();
+            }
+            foreach (Floor floor in Floors)
+            {
+                floor.GetCeilingTurret().ReloadingTurret();
             }
         }
         // shows staff info to user
@@ -135,18 +133,6 @@ namespace Area51ProjektConsoleApp
                     Console.WriteLine("\t" + staff.Living);
                 }
             }
-        }
-        public void BaseBehavior()
-        {
-            foreach(Staff staff in Staffs)
-            {
-                TurnStaff(staff);
-            }
-            foreach(Elevator elevator in Elevators)
-            {
-                TurnElevator(elevator);
-            }
-            ReloadTurrets();
         }
     }
 }

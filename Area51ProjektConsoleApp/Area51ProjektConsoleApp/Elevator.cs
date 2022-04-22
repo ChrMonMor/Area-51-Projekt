@@ -64,7 +64,7 @@ namespace Area51ProjektConsoleApp
             }
         }
 
-        public void ElevatorBehavior(Base @base)
+        public void ElevatorBehavior()
         {
             if (Rider == null)
             {
@@ -100,7 +100,7 @@ namespace Area51ProjektConsoleApp
             staff.AtFloor = AtFloor;
             Rider = null;
         }
-        public void SetDelayingElevator()
+        private void SetDelayingElevator()
         {
             DelayingElevator = Speed;
         }
